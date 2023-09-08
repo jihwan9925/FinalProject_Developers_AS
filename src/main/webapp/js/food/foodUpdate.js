@@ -123,3 +123,48 @@ function submitFoodRecommendForm() {
 	form.submit(); // 폼 데이터를 서버로 전송
 }
 
+/*====================================지환(AS)================================*/
+function fn_foodRegist(event){
+	//console.log($("#flexSwitchCheckChecked").val());
+	const result = confirm("맛집 수정을 완료 하시겠습니까?");
+	if(result == true){
+	  $(event.target).attr("type","submit");
+		const form=new FormData();
+		const fileInput=$("#upFile");
+
+		$.each(fileInput[0].files,(i,f)=>{
+			form.append("upFile",f);
+      console.log(form);
+    });
+        
+    //form.append("foodNo",'${f.foodNo}');
+    //맛집이름, 주소, 메뉴, 첨부사진 (없는거 : 오픈타임, 번호)
+    form.append("frGrade",$(".starcountnum").val()/2);
+    form.append("frContent",$("#FR_CONTENT").val());
+    form.append("frNo",$("#selected_food_no").val());
+    form.append("allow",$("#flexSwitchCheckChecked").val());
+
+    $.ajax({
+      url:getContextPath()+"/food/foodRegist.do",
+      data:form,
+      type:"post",
+      enctype: "multipart/form-data",
+      processData:false,
+      contentType:false,
+      cache: false,
+      success:data=>{
+        alert("수정이 완료되었습니다.");
+        location.reload();
+        $('window').scrollTop(0);
+      },
+      error:(r,s,e)=>{
+        console.log("수정 실패 "+r.s+"\n"+"msg "+r.responseText+"\n"+"error "+e);
+        alert("수정 실패");
+      },
+      complete:()=>{
+        $(".upFile").val('');
+      }
+    });
+  }
+};
+

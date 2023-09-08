@@ -19,7 +19,7 @@ $(()=>{
 
 // ======================= 지환 ====================
 function fn_foodInfo(foodNo){
-	location.assign(getContextPath()+'/admin/selectFoodByFoodNo?foodNo='+foodNo);
+	location.assign(getContextPath()+'/selectFoodByFoodNo?foodNo='+foodNo);
 }
 function fn_deleteFood(foodNo){
 	const result = confirm("정말 삭제하시겠습니까?");

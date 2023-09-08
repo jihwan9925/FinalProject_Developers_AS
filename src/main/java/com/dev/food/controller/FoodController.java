@@ -125,14 +125,7 @@ public class FoodController {
 		StringBuilder result0 = new StringBuilder();
 		String urlStr0 = "http://apis.data.go.kr/B551011/KorService1/areaBasedList1?" + "&" + "serviceKey" + "="
 				+ "Qpncm3m%2Fbx1Ph6PQUHC4FT6%2BcaFJ1mEGs4R7vrqWvCOMp2lZBfGp2zHQ5A%2BWvuLj8R6IRfwTw43LBM%2F1FWGojA%3D%3D"
-				+ "&" + "MobileOS" + "=" + "ETC" + "&" + "MobileApp" + "=" + "foodTest" + "&" + "numOfRows" + "=" + "1" // "현재
-																														// api의
-																														// 개수
-																														// 불러옴
-																														// ,
-																														// 개수
-																														// 상관
-																														// x"
+				+ "&" + "MobileOS" + "=" + "ETC" + "&" + "MobileApp" + "=" + "foodTest" + "&" + "numOfRows" + "=" + "1" 
 				+ "&" + "pageNo" + "=" + "1" + "&" + "contentTypeId" + "=" + "39" + "&" + "_type" + "=" + "json" + "&"
 				+ "listYN" + "=" + "N" + "&" + "arrange" + "=" + "O";
 
@@ -652,7 +645,7 @@ public class FoodController {
 	}
 
 	
-	@GetMapping("/foodRegist")
+	@GetMapping("/foodRegist.do")
 	@ResponseBody
 	public void foodRegist(Food foods) {
 		//유저가 직접 작성한 맛집을 저장하는 과정
