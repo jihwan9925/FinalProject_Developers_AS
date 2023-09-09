@@ -138,11 +138,12 @@ function fn_foodRegist(event){
     });
         
     //form.append("foodNo",'${f.foodNo}');
-    //맛집이름, 주소, 메뉴, 첨부사진 (없는거 : 오픈타임, 번호)
-    form.append("frGrade",$(".starcountnum").val()/2);
-    form.append("frContent",$("#FR_CONTENT").val());
-    form.append("frNo",$("#selected_food_no").val());
-    form.append("allow",$("#flexSwitchCheckChecked").val());
+    //맛집이름, 주소,(없는거 : 오픈타임), 메뉴, (없는거 : 번호), 첨부사진
+    form.append("foodName",$(".userFoodName").val());
+    form.append("foodAddress",$("#sample6_address").val()+$("#sample6_extraAddress").val()+" "+$("#sample6_detailAddress").val());
+    form.append("foodOpenTime",$("#userFoodOpenTime").val());
+    form.append("foodMenu",$("#userFoodMenu").val());
+    form.append("foodPhone",$("#selected_food_no").val());
 
     $.ajax({
       url:getContextPath()+"/food/foodRegist.do",

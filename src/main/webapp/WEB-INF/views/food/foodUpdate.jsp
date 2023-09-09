@@ -45,7 +45,7 @@
 			<table class="table">
 				<tr>
 					<th>상호명</th>
-					<td><input type="text" class="" placeholder="상호명을 입력해주세요."
+					<td><input type="text" class="userFoodName" placeholder="상호명을 입력해주세요."
 						name="foodName" id="" required></td>
 				</tr>
 				<tr>
@@ -61,20 +61,32 @@
 					</td>
 				</tr>
 				<tr>
+					<th>오픈타임</th>
+					<td>
+						<input type="text" id="userFoodOpenTime" placeholder="런치타임, 라스트오더 등등">
+					</td>
+				</tr>
+				<tr>
 					<th>추천 메뉴</th>
 					<td><input type="text" class="" placeholder="메뉴 입력해주세요."
-						name="" id="" required></td>
+						name="" id="userFoodMenu" required></td>
+				</tr>
+				<tr>
+					<th>전화번호</th>
+					<td>
+						<input type="text" id="userFoodPhone" placeholder=" - 포함">
+					</td>
 				</tr>
 				<tr>
 					<th>첨부사진</th>
 					<td>
-						<input name="file" type="file" class="real-upload" accept="image/*" required multiple>
+						<input name="file" type="file" id="upFile" class="real-upload" accept="image/*" required multiple>
 						<div class="upload"></div>
 						<ul class="image-preview"></ul>
 					</td>
 				</tr>
 				<div id="registBtn">
-					<input type="submit" value="등록하기">
+					<input type="submit" value="등록하기" onclick="fn_updateCheck(event);">
 				</div>
 			</table>
 		</form>
