@@ -648,40 +648,49 @@ public class FoodController {
 	@GetMapping("/foodRegist.do")
 	@ResponseBody
 	public void foodRegist(HttpSession session, MultipartFile[] upFile, Food foods) {
-		//유저가 직접 작성한 맛집을 저장하는 과정
-		System.out.println("output_test : "+foods);
+		
+	  //유저가 직접 작성한 맛집을 저장하는 과정
+	  System.out.println("output_test : "+foods);
+	  
+	  // 파일을 저장할경로 가져오기 
+	  String path = session.getServletContext().getRealPath("/images/upload/food/");
+	  
+	  System.out.println("path : "+path);
+	  System.out.println("upFile : "+upFile); // 파일 업로드+dto에 추가 
+	  
+	  if (upFile != null) { 
+		  for (MultipartFile mf : upFile) { 
+			  if (!mf.isEmpty()) { // 원래이름 + 개명된 이름 설정
+				  String rpName = mf.getOriginalFilename(); 
+				  String ext = rpName.substring(rpName.lastIndexOf(".")); 
+				  Date today = new Date(System.currentTimeMillis()); 
+				  SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmssSSS"); 
+				  int rdn = (int) (Math.random() * 10000) + 1; 
+				  String rename = sdf.format(today) + "_" + rdn + ext;
+	  
+				  try { 
+					  mf.transferTo(new File(path + rename));
+				  } catch (IOException e) {
+					  e.printStackTrace(); 
+				  }
+	  
+				  FoodPhoto fp = FoodPhoto.builder().fpName(rename).fpId(rename).build();
+				  System.out.println("photo : "+fp); 
+				  foods.getFoodPhoto().add(fp); 
+			  } 
+		  } 
+	  }
+	  try { 
+		  //foodNo가 없는 상태이기 때문에 이를 해결해야함
+		  //service.insertFood(foods); 
+	  } catch (RuntimeException e) {
+		  e.printStackTrace(); // 실패시 DB에는 값이 없지만 upload파일은 남는 문제가 생겨 같이 제거해주는 과정이필요하다. 
+		  for (FoodPhoto p : foods.getFoodPhoto()) { 
+			  File delFile = new File(path + p.getFpName()); 
+			  delFile.delete(); 
+		  }
+	  }
 
-		/* // 아직 작성자 처리방안 고려안함
-		 * // session에서 직접 받아오기 Member member = (Member)
-		 * session.getAttribute("loginMember"); // member에서 객체를 생성해서 int 주입
-		 * foods.setMember(Member.builder().memberId(member.getMemberId()).build());
-		 * foods.setMemberId(member.getMemberId()); // System.out.println("dto : "+fr);
-		 * // System.out.println("FRGRADE CHECK : "+fr.getFrGrade());
-		 * 
-		 * // 파일을 저장할경로 가져오기 String path =
-		 * session.getServletContext().getRealPath("/images/upload/food/"); //
-		 * System.out.println("path : "+path); //
-		 * System.out.println("upFile : "+upFile); // 파일 업로드+dto에 추가 if (upFile != null)
-		 * { for (MultipartFile mf : upFile) { if (!mf.isEmpty()) { // 원래이름 + 개명된 이름 설정
-		 * String rpName = mf.getOriginalFilename(); String ext =
-		 * rpName.substring(rpName.lastIndexOf(".")); Date today = new
-		 * Date(System.currentTimeMillis()); SimpleDateFormat sdf = new
-		 * SimpleDateFormat("yyyyMMdd_HHmmssSSS"); int rdn = (int) (Math.random() *
-		 * 10000) + 1; String rename = sdf.format(today) + "_" + rdn + ext;
-		 * 
-		 * try { mf.transferTo(new File(path + rename)); } catch (IOException e) {
-		 * e.printStackTrace(); }
-		 * 
-		 * FoodReviewPhoto rp =
-		 * FoodReviewPhoto.builder().rpName(rpName).rpRename(rename).build(); //
-		 * System.out.println("photo : "+rp); foods.getFoodReviewPhoto().add(rp); } } }
-		 * try { service.insertFoodReview(foods); } catch (RuntimeException e) {
-		 * e.printStackTrace(); // 실패시 DB에는 값이 없지만 upload파일은 남는 문제가 생겨 같이 제거해주는 과정이
-		 * 필요하다. for (FoodReviewPhoto p : foods.getFoodReviewPhoto()) { File delFile =
-		 * new File(path + p.getRpRename()); delFile.delete(); }
-		 * 
-		 * }
-		 */
 	}
 	 
 
