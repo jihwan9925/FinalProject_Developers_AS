@@ -647,10 +647,10 @@ public class FoodController {
 	
 	@GetMapping("/foodRegist.do")
 	@ResponseBody
-	public void foodRegist(HttpSession session, MultipartFile[] upFile, Food foods) {
+	public void foodRegist(MultipartFile[] upFile, Food food) {
 		
 	  //유저가 직접 작성한 맛집을 저장하는 과정
-	  System.out.println("output_test : "+foods);
+	  System.out.println("output_test : "+food);
 	  
 	  // 파일을 저장할경로 가져오기 
 	  String path = session.getServletContext().getRealPath("/images/upload/food/");
@@ -676,16 +676,18 @@ public class FoodController {
 	  
 				  FoodPhoto fp = FoodPhoto.builder().fpName(rename).fpId(rename).build();
 				  System.out.println("photo : "+fp); 
-				  foods.getFoodPhoto().add(fp); 
+				  food.getFoodPhoto().add(fp); 
 			  } 
 		  } 
 	  }
 	  try { 
-		  //foodNo가 없는 상태이기 때문에 이를 해결해야함
-		  //service.insertFood(foods); 
+		  //foodNo가 없는 상태이기 때문에 이를 해결해야 함
+		  //foodNo, allow(0) 
+		  food.setAllow(0);
+		  service.insertFoodUser(food);
 	  } catch (RuntimeException e) {
 		  e.printStackTrace(); // 실패시 DB에는 값이 없지만 upload파일은 남는 문제가 생겨 같이 제거해주는 과정이필요하다. 
-		  for (FoodPhoto p : foods.getFoodPhoto()) { 
+		  for (FoodPhoto p : food.getFoodPhoto()) { 
 			  File delFile = new File(path + p.getFpName()); 
 			  delFile.delete(); 
 		  }

@@ -16,6 +16,8 @@ public interface FoodService {
 
 	int insertFood(FoodTemp food);
 	
+	int insertFoodUser(Food food);
+	
 	int insertFoodPhoto(FoodPhotoTemp fp);
 
 	int updateFood(FoodTemp food);

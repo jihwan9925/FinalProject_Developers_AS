@@ -19,6 +19,8 @@ public interface FoodDao {
 	
 	int insertFood(SqlSession session, Food f);
 	
+	int insertFoodUser(SqlSession session, Food food);
+	
 	List<Food> selectPage(SqlSession session, int cPage, int numPerpage);
 
 	int insertFood(SqlSession session, FoodTemp f);

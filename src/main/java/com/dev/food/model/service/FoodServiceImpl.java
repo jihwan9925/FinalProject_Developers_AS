@@ -41,19 +41,21 @@ public class FoodServiceImpl implements FoodService{
 	private SqlSessionTemplate session;
 
 	@Override
-	//@Transactional(rollbackFor = {Exception.class})
 	public int insertFood(FoodTemp f){
 		return dao.insertFood(session, f);
 	}
 	
 	@Override
-	//@Transactional(rollbackFor = {Exception.class})
+	public int insertFoodUser(Food food) {
+		return dao.insertFoodUser(session, food);
+	}
+	
+	@Override
 	public int insertFoodPhoto(FoodPhotoTemp fp){
 		return dao.insertFoodPhoto(session, fp);
 	}
 	
 	@Override
-	//@Transactional(rollbackFor = {Exception.class})
 	public int updateFood(FoodTemp f){
 		return dao.updateFood(session,f);
 	}

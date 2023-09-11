@@ -45,6 +45,11 @@ public class FoodDaoImpl implements FoodDao {
 	}
 	
 	@Override
+	public int insertFoodUser(SqlSession session, Food food) {
+		return session.insert("food.insertFoodUser", food);
+	}
+	
+	@Override
 	public int insertFoodPhoto(SqlSession session, FoodPhotoTemp fp) {
 		return session.insert("food.insertFoodPhoto", fp);
 	}
