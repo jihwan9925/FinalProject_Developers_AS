@@ -82,7 +82,7 @@
 
 <script>
 	$(".submitModal").click(e=>{
-		alert("test");
+
 		//js가 제공하는 FormData클래스를 이용함
 		const form=new FormData();
 		//append로 서버에 전송할 데이터를 넣을 수 있음
@@ -97,7 +97,8 @@
 		form.append("foodAddress",$("#sample6_address").val()+$("#sample6_extraAddress").val()+" "+$("#sample6_detailAddress").val());
 		form.append("foodOpenTime",$("#userFoodOpenTime").val());
 		form.append("foodMenu",$("#userFoodMenu").val());
-		form.append("foodPhone",$("#selected_food_no").val());
+		form.append("foodPhone",$("#userFoodPhone").val());
+		console.log($("#userFoodPhone").val());
 		$.ajax({
 			url:getContextPath()+"/foodRegist.do",
 			data:form,

@@ -454,6 +454,8 @@ public class FoodController {
 	@ResponseBody
 	public void insertFoodReview(HttpSession session, MultipartFile[] upFile, FoodReview fr) {
 
+		System.out.println("get info : "+fr);
+		
 		// session에서 직접 받아오기
 		Member member = (Member) session.getAttribute("loginMember");
 		// member에서 객체를 생성해서 int 주입
@@ -486,6 +488,8 @@ public class FoodController {
 
 					FoodReviewPhoto rp = FoodReviewPhoto.builder().rpName(rpName).rpRename(rename).build();
 //					System.out.println("photo : "+rp);
+					//System.out.println("get info : "+fr.getFoodReviewPhoto());
+					//System.out.println("get info : "+fr);
 					fr.getFoodReviewPhoto().add(rp);
 				}
 			}
@@ -645,10 +649,9 @@ public class FoodController {
 	}
 
 	
-	@GetMapping("/foodRegist.do")
+	@PostMapping("/foodRegist.do")
 	@ResponseBody
 	public void foodRegist(MultipartFile[] upFile, Food food) {
-		
 	  //유저가 직접 작성한 맛집을 저장하는 과정
 	  System.out.println("output_test : "+food);
 	  
@@ -676,6 +679,8 @@ public class FoodController {
 	  
 				  FoodPhoto fp = FoodPhoto.builder().fpName(rename).fpId(rename).build();
 				  System.out.println("photo : "+fp); 
+				  //System.out.println("get info : "+food.getFoodPhoto());
+				  System.out.println("get info : "+food);
 				  food.getFoodPhoto().add(fp); 
 			  } 
 		  } 

@@ -1,5 +1,6 @@
 package com.dev.food.model.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -22,7 +23,7 @@ public class Food {
 	private int allow;
 	private int foodReadCount;
 	private int foodHeartCount;
-	private List<FoodPhoto> foodPhoto;
+	private List<FoodPhoto> foodPhoto = new ArrayList<FoodPhoto>();
 	private List<FoodReview> foodReview;
 	private List<FoodHeart> foodHeart;
 
