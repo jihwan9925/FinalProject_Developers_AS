@@ -24,7 +24,7 @@ function fn_foodInfo(foodNo){
 function fn_deleteFood(foodNo){
 	const result = confirm("정말 삭제하시겠습니까?");
 	if(result == true){
-		location.assign(getContextPath()+'/admin/deleteFoodByFoodNo?foodNo='+foodNo);
+		location.assign(getContextPath()+'/deleteFoodByFoodNo?foodNo='+foodNo);
 	}
 }
 

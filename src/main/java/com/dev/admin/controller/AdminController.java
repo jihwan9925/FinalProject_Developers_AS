@@ -481,7 +481,7 @@ public class AdminController {
 
 	@GetMapping("/deleteFoodByFoodNo")
 	public String deleteFoodByFoodNo(int foodNo, HttpServletRequest request) {
-		System.out.println(foodNo);
+		//System.out.println(foodNo);
 		int flag = foodService.deleteFoodOnAdmin(foodNo);
 		String result;
 		if (flag > 0) {

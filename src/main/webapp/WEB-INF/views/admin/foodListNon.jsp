@@ -29,22 +29,7 @@
 						onclick="location.assign('${path}/admin/selectFoodListApprove')">승인 목록</button>
 				</li>
 			</ul>
-
-				<div id="search-container" class="d-flex w-30 h-10" style="float:right;">
-		        	<!-- 검색타입 : &nbsp;
-		        	<select id="searchType" class="mb-3" style="width:100px; height:30px;">
-		        		<option value="tourisName" ${not empty tourisName ? "selected":""}>맛집 이름</option>
-		        		<option value="tourisAreaId" ${not empty tourisAreaId ? "selected":""}>메뉴</option>
-		        	</select>
-		        	<div id="search-tourisName">
-		        		<form action="${path}/admin/selectFoodList" method="get">
-		        			<input type="hidden" name="" value="" >
-		        			<input type="text" name="tourisName" size="25" placeholder="검색할 키워드를 입력하세요" 
-		        			value="${not empty tourisName ? tourisName:''}">
-		        			<button type="submit" class="btn btn-outline-dark btn-sm">검색</button>
-		        		</form>
-		        	</div> -->
-		        </div>	
+				<div id="search-container" class="d-flex w-30 h-10" style="float:right;"></div>	
 	        <div class="col">
 				<!-- 미승인 목록 -->
 				<div class="tab-content" id="myTabContent">
