@@ -163,8 +163,10 @@ public class FoodDaoImpl implements FoodDao {
 
 	@Override
 	public List<Food> searchFood(SqlSession session, Map<String, Object> params) {
-		int cPage=(int)params.get("cPage");
-		int numPerpage=(int)params.get("numPerpage");
+		int cPage = (int)params.get("cPage");
+		int numPerpage = (int)params.get("numPerpage");
+		//String searchType = (String)params.get("searchType");
+		//String keyword = (String)params.get("keyword");
 		
 		return session.selectList("food.foodSearch",params,new RowBounds((cPage-1)*numPerpage, numPerpage));
 	}
