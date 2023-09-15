@@ -90,9 +90,11 @@ public class FoodController {
 		List<Food> foodList = service.searchFood(
 				Map.of("cPage", cPage, "numPerpage", numPerpage, "searchType", searchType, "keyword", keyword)
 		);
+		
 		int totalData = service.selectFoodCount();
 		m.addAttribute("pageBar", PageFactory.getPage(cPage, numPerpage, totalData, "foodList.do"));
 		m.addAttribute("foods", foodList);
+		m.addAttribute("keyword", keyword);
 
 		return "food/foodList";
 	}

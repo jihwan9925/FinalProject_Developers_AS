@@ -4,7 +4,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="path" value="${pageContext.request.contextPath }" />
-<link rel="stylesheet" href="${path }/css/food/foodList.css" />
 
 <head>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
@@ -96,6 +95,9 @@
 				</div>
 			</c:forEach>
 		</c:if>
+		<c:if test="${empty foods }">
+			<div class="food_notsearch">검색결과가 없습니다.</div>
+		</c:if>
 		<!-- /음식 목록 -->
 
 		<input type="hidden" value="${loginMember.memberId }" id="memberL">
@@ -113,19 +115,26 @@
 	</div>
 	
 	<!-- /페이지바 -->
-	<script type="text/javascript">
-		<c:forEach var="f" items="${foods}">
-			<c:forEach var="fh" items="${f.foodHeart}">
-				<c:if test="${loginMember.memberId==fh.memberId}">
-					$(".like").each(function(i,l){
-						if($(this).val()==${fh.foodNo}){
-							$(this).prop("checked",true);
-						}
-					});
-				</c:if>
-			</c:forEach>
+	<c:forEach var="f" items="${foods}">
+		<c:forEach var="fh" items="${f.foodHeart}">
+			<c:if test="${loginMember.memberId==fh.memberId}">
+				$(".like").each(function(i,l){
+					if($(this).val()==${fh.foodNo}){
+						$(this).prop("checked",true);
+					}
+				});
+			</c:if>
 		</c:forEach>
+	</c:forEach>
+	<script type="text/javascript">
+		
+	<!-- 검색어 유지 -->
+	if("${keyword}" != "")
+	{
+		$("#keyword").val("${keyword}");
+	}
 	</script>
+	
 	
 </section>
 
