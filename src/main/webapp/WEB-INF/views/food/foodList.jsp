@@ -113,8 +113,8 @@
 	<div id="pageBar">
 		<c:out value="${pageBar }" escapeXml='false' />
 	</div>
-	
 	<!-- /페이지바 -->
+	
 	<c:forEach var="f" items="${foods}">
 		<c:forEach var="fh" items="${f.foodHeart}">
 			<c:if test="${loginMember.memberId==fh.memberId}">
@@ -126,8 +126,8 @@
 			</c:if>
 		</c:forEach>
 	</c:forEach>
+	
 	<script type="text/javascript">
-		
 	<!-- 검색어 유지 -->
 	if("${keyword}" != "")
 	{

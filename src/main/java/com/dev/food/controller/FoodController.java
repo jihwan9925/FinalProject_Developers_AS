@@ -37,6 +37,7 @@ import com.dev.food.model.dto.FoodReview;
 import com.dev.food.model.dto.FoodReviewPhoto;
 import com.dev.food.model.dto.FoodTemp;
 import com.dev.food.model.service.FoodService;
+import com.dev.member.model.dto.Black;
 import com.dev.member.model.dto.Member;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -86,15 +87,23 @@ public class FoodController {
 			@RequestParam(value = "cPage", defaultValue = "1") int cPage,
 			@RequestParam(value = "numPerpage", defaultValue = "12") int numPerpage, Model m) {
 
+		System.out.println("keyword : "+keyword);
 		Map<String, Object> searchPage = new HashMap<String, Object>();
 		List<Food> foodList = service.searchFood(
 				Map.of("cPage", cPage, "numPerpage", numPerpage, "searchType", searchType, "keyword", keyword)
 		);
 		
 		int totalData = service.selectFoodCount();
-		m.addAttribute("pageBar", PageFactory.getPage(cPage, numPerpage, totalData, "foodList.do"));
+		//m.addAttribute("pageBar", PageFactory.getPage(cPage, numPerpage, totalData, "foodList.do"));
 		m.addAttribute("foods", foodList);
 		m.addAttribute("keyword", keyword);
+		
+		
+		Map<String, String> type = new HashMap();
+		type.put("typeId", "keyword");
+		type.put("value", keyword);
+		
+		m.addAttribute("pageBar", new com.dev.admin.common.PageFactory().getPage(cPage, numPerpage, totalData, "searchFood.do", type));
 
 		return "food/foodList";
 	}
