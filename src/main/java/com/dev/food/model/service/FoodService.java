@@ -54,6 +54,8 @@ public interface FoodService {
 	
 	int selectFoodCount();
 	
+	int selectFoodCountByKeyword(Map type);
+	
 	Food selectFoodByNo(int no);
 	
 	int selectFoodPhotoByNo(String fpName);

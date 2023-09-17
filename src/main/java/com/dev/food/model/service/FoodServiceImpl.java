@@ -135,6 +135,12 @@ public class FoodServiceImpl implements FoodService{
 	public int selectFoodCount() {
 		// TODO Auto-generated method stub
 		return dao.selectFoodCount(session);
+	}	
+	
+	@Override
+	public int selectFoodCountByKeyword(Map type) {
+		// TODO Auto-generated method stub
+		return dao.selectFoodCountByKeyword(session,type);
 	}
 
 	@Override

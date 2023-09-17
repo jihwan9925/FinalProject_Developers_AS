@@ -61,6 +61,8 @@ public interface FoodDao {
 	
 	int selectFoodCount(SqlSession session);
 	
+	int selectFoodCountByKeyword(SqlSession session, Map type);
+	
 	Food selectFoodByNo(SqlSession session, int no);
 	
 	int selectFoodPhotoByNo(SqlSession session, String fpName);

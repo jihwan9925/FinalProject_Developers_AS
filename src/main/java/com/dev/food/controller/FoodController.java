@@ -87,23 +87,27 @@ public class FoodController {
 			@RequestParam(value = "cPage", defaultValue = "1") int cPage,
 			@RequestParam(value = "numPerpage", defaultValue = "12") int numPerpage, Model m) {
 
-		System.out.println("keyword : "+keyword);
-		Map<String, Object> searchPage = new HashMap<String, Object>();
+		//System.out.println("searchType : "+searchType);
+		
+		//Map<String, Object> searchPage = new HashMap<String, Object>();
 		List<Food> foodList = service.searchFood(
 				Map.of("cPage", cPage, "numPerpage", numPerpage, "searchType", searchType, "keyword", keyword)
 		);
 		
-		int totalData = service.selectFoodCount();
-		//m.addAttribute("pageBar", PageFactory.getPage(cPage, numPerpage, totalData, "foodList.do"));
-		m.addAttribute("foods", foodList);
-		m.addAttribute("keyword", keyword);
-		
 		
 		Map<String, String> type = new HashMap();
-		type.put("typeId", "keyword");
+		type.put("typeId", searchType);
 		type.put("value", keyword);
 		
-		m.addAttribute("pageBar", new com.dev.admin.common.PageFactory().getPage(cPage, numPerpage, totalData, "searchFood.do", type));
+		System.out.println("typeId : "+type.get("typeId")+", value : "+type.get("value"));
+		
+		int totalDataKeyword = service.selectFoodCountByKeyword(type);
+		
+		System.out.println("totalDataKeyword : "+totalDataKeyword);
+		
+		m.addAttribute("pageBar", new com.dev.admin.common.PageFactory().getPage(cPage, numPerpage, totalDataKeyword, "searchFood.do", type));
+		m.addAttribute("foods", foodList);
+		m.addAttribute("keyword", keyword);
 
 		return "food/foodList";
 	}

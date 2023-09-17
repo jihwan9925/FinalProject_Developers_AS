@@ -146,8 +146,12 @@ public class FoodDaoImpl implements FoodDao {
 
 	@Override
 	public int selectFoodCount(SqlSession session) {
-		// TODO Auto-generated method stub
 		return session.selectOne("food.selectFoodCount");
+	}
+	
+	@Override
+	public int selectFoodCountByKeyword(SqlSession session, Map type) {
+		return session.selectOne("food.selectFoodCountByKeyword", type);
 	}
 
 	@Override

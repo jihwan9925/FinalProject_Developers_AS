@@ -33,8 +33,9 @@
 		<div class="search-notice text-end mt-3">
 			<form action="${path }/food/searchFood.do" class="searchForm" method="GET">
 				<select name="searchType">
-					<option value="titile" name="title">상호명</option>
-					<option value="address" name="address">주소</option>
+					<option value="FOOD_NAME" name="title">상호명</option>
+					<option value="FOOD_ADDRESS" name="address">주소</option>
+					<option value="FOOD_MENU" name="menu">메뉴</option>
 				</select> 
 				<input type="text" id="keyword" name="keyword" placeholder="검색어를 입력해주세요">
 				<button type="button" class="" onclick="searchFood();">검색</button>
