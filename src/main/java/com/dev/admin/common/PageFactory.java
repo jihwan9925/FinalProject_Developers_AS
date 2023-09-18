@@ -57,12 +57,12 @@ public static String getPage(int cPage, int numPerpage, int totalData, String ur
 		
 		pageBar.append("<script>");
 		pageBar.append("function fn_paging(no){");
+		System.out.println("type : "+type.get("typeId")+", "+type.get("value"));
 		if(type.isEmpty()) {
 			pageBar.append("location.assign('"+url+"?cPage='+no+'&numPerpage="+numPerpage+"');");
 		}else {
 			String typeId=(String)type.get("typeId");
 			String value=(String)type.get("value");
-			System.out.println("page-allow : "+value);
 			pageBar.append("location.assign('"+url+"?cPage='+no+'&numPerpage="+numPerpage+"&"+typeId+"="+value+"');");
 		}
 		pageBar.append("}");

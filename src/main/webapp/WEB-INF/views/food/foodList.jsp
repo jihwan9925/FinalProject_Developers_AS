@@ -5,7 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="path" value="${pageContext.request.contextPath }" />
 
-<head>
+<!-- <head> -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 	<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
@@ -20,11 +20,11 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css" />
 	<link rel="stylesheet" href="${path }/css/default.css" />
 	<link rel="stylesheet" href="${path }/css/food/foodList.css" />
-</head>
+<!-- </head> -->
 
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
-<section>
+<!-- <section> -->
 	<!-- 맛집 리스트 순서 -->
 	<div id="foodList_theme">
 		<div id="food_main_theme">
@@ -32,6 +32,7 @@
 		</div>
 		<div class="search-notice text-end mt-3">
 			<form action="${path }/food/searchFood.do" class="searchForm" method="GET">
+				<div class="text-secondary" >검색결과 ${totalData }개</div>&nbsp;&nbsp;&nbsp;
 				<select name="searchType">
 					<option value="FOOD_NAME" name="title">상호명</option>
 					<option value="FOOD_ADDRESS" name="address">주소</option>
@@ -116,7 +117,7 @@
 	</div>
 	<!-- /페이지바 -->
 	
-	<c:forEach var="f" items="${foods}">
+	<%-- <c:forEach var="f" items="${foods}">
 		<c:forEach var="fh" items="${f.foodHeart}">
 			<c:if test="${loginMember.memberId==fh.memberId}">
 				$(".like").each(function(i,l){
@@ -126,20 +127,23 @@
 				});
 			</c:if>
 		</c:forEach>
-	</c:forEach>
+	</c:forEach> --%>
 	
-	<script type="text/javascript">
-	<!-- 검색어 유지 -->
+	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+
+</section>
+
+<script type="text/javascript">
+	<!-- 필터/검색어 유지 -->
+	if("${searchType}" != "")
+	{
+		$("select[name='searchType']").val("${searchType}");
+	}
 	if("${keyword}" != "")
 	{
 		$("#keyword").val("${keyword}");
 	}
-	</script>
-	
-	
-</section>
+</script>
 
 <script src="${path }/js/food/foodList.js" />
-
-
-<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+	

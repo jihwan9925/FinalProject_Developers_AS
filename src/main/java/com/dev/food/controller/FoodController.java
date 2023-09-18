@@ -1,7 +1,6 @@
 package com.dev.food.controller;
 
 import java.io.BufferedReader;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -28,16 +27,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.dev.common.PageFactory;
+import com.dev.common.PageFactoryByKeyword;
 import com.dev.food.model.dto.Food;
 import com.dev.food.model.dto.FoodBlackList;
-import com.dev.food.model.dto.FoodHeart;
 import com.dev.food.model.dto.FoodPhoto;
 import com.dev.food.model.dto.FoodPhotoTemp;
 import com.dev.food.model.dto.FoodReview;
 import com.dev.food.model.dto.FoodReviewPhoto;
 import com.dev.food.model.dto.FoodTemp;
 import com.dev.food.model.service.FoodService;
-import com.dev.member.model.dto.Black;
 import com.dev.member.model.dto.Member;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -83,7 +81,8 @@ public class FoodController {
 	}
 
 	@GetMapping("/searchFood.do")
-	public String searchFood(@RequestParam("searchType") String searchType, @RequestParam("keyword") String keyword,
+	public String searchFood(
+			@RequestParam("searchType") String searchType, @RequestParam("keyword") String keyword,
 			@RequestParam(value = "cPage", defaultValue = "1") int cPage,
 			@RequestParam(value = "numPerpage", defaultValue = "12") int numPerpage, Model m) {
 
@@ -105,9 +104,11 @@ public class FoodController {
 		
 		System.out.println("totalDataKeyword : "+totalDataKeyword);
 		
-		m.addAttribute("pageBar", new com.dev.admin.common.PageFactory().getPage(cPage, numPerpage, totalDataKeyword, "searchFood.do", type));
+		m.addAttribute("pageBar", PageFactoryByKeyword.getPage(cPage, numPerpage, totalDataKeyword, "searchFood.do", type));
 		m.addAttribute("foods", foodList);
+		m.addAttribute("searchType", searchType);
 		m.addAttribute("keyword", keyword);
+		m.addAttribute("totalData", totalDataKeyword);
 
 		return "food/foodList";
 	}
