@@ -89,10 +89,10 @@
 					<div class="food_menu">${f.foodName }</div>
 					<div class="food_address" style="color: #828282;">${f.foodAddress}</div>
 					<div class="countDiv">
-						<%-- <img class="heart" src="${path }/images/food/fillheart.svg">
+						<img class="heart" src="${path }/images/food/fillheart.svg">
                   <span class="heart_count">${f.foodHeartCount }</span> 
                   <img class="comment" src="${path }/images/food/comment.png"> 
-                  <span class="comment_count">${f.foodReadCount}</span> --%>
+                  <span class="comment_count">${f.foodReadCount}</span>
 					</div>
 				</div>
 			</c:forEach>
@@ -143,6 +143,22 @@
 	{
 		$("#keyword").val("${keyword}");
 	}
+
+	<!-- 좋아요 비동기 업데이트 -->
+	$("input.like").click(e=>{
+		$.ajax({
+			type : "GET",            // HTTP method type(GET, POST) 형식이다.
+			url : "/test/ajax",      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : params,            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				// 응답코드 > 0000
+				alert(res.code);
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.")
+			}
+		});
+	})
 </script>
 
 <script src="${path }/js/food/foodList.js" />
