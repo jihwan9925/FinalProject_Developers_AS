@@ -24,7 +24,7 @@ $(".like").on("change",function(){
 					
 				}
 			}
-		})
+		});
 	}else{
 		$.ajax({
 			url : path+"/ac/deleteHeart",
@@ -37,7 +37,7 @@ $(".like").on("change",function(){
 					
 				}
 			}
-		})
+		});
 	}
 	
 })

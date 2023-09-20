@@ -133,7 +133,7 @@
 
 </section>
 
-<script type="text/javascript">
+<script>
 	<!-- 필터/검색어 유지 -->
 	if("${searchType}" != "")
 	{
@@ -159,6 +159,39 @@
 			}
 		});
 	})
+
+	$(".like").on("change",function(){
+	
+		var foodNo=$(this).val();
+		
+		if($(this).is(":checked")){
+			$.ajax({
+				url : pageContext.request.contextPath+"/food/insertHeart",
+				data :{
+					memberId : memberId,
+					foodNo : foodNo
+				},
+				success:function(result){
+					if(result>0){
+						
+					}
+				}
+			})
+		}else{
+			$.ajax({
+				url : ${path}+"/food/deleteHeart",
+				data :{
+					memberId : memberId,
+					foodNo : foodNo
+				},
+				success:function(result){
+					if(result>0){
+						
+					}
+				}
+			})
+		}
+	});
 </script>
 
 <script src="${path }/js/food/foodList.js" />

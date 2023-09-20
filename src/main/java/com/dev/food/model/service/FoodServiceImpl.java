@@ -187,16 +187,26 @@ public class FoodServiceImpl implements FoodService{
 		return dao.getFoodById(session, memberId);
 	}
 	
+	/*
+	 * @Override public int insertHeart(Map param) {
+	 * 
+	 * int result=dao.insertHeart(session, param); int
+	 * result2=dao.updateHeart(session, param); 
+	 * System.out.println(result);
+	 * System.out.println(result2); 
+	 * return result2; 
+	 * }
+	 * 
+	 * @Override public int deleteHeart(Map param) { 
+	 * return dao.deleteHeart(session, param); 
+	 * }
+	 */
+	
 	@Override
 	public int insertHeart(Map param) {
-		
-		int result=dao.insertHeart(session, param);
-		int result2=dao.updateHeart(session, param);
-		System.out.println(result);
-		System.out.println(result2);
-		return result2;
+		return dao.insertHeart(session, param);
 	}
-
+	
 	@Override
 	public int deleteHeart(Map param) {
 		return dao.deleteHeart(session, param);

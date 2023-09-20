@@ -603,23 +603,37 @@ public class FoodController {
 		service.deleteFoodReview(frNo);
 	}
 
+	/*
+	 * @GetMapping("/insertHeart")
+	 * 
+	 * @ResponseBody public int insertHeart(@RequestParam Map param, HttpSession
+	 * session, int foodNo) { Member loginMember = (Member)
+	 * session.getAttribute("loginMember"); param.put("memberId",
+	 * loginMember.getMemberId()); param.put("foodNo", foodNo); int result =
+	 * service.insertHeart(param); return result; }
+	 * 
+	 * @GetMapping("/deleteHeart")
+	 * 
+	 * @ResponseBody public int deleteHeart(@RequestParam Map param, HttpSession
+	 * session, int foodNo) { Member loingMember = (Member)
+	 * session.getAttribute("loginMember"); param.put("memberId",
+	 * loingMember.getMemberId()); param.put("foodNo", foodNo); int result =
+	 * service.deleteHeart(param); return result; }
+	 */
+	
 	@GetMapping("/insertHeart")
 	@ResponseBody
-	public int insertHeart(@RequestParam Map param, HttpSession session, int foodNo) {
-		Member loginMember = (Member) session.getAttribute("loginMember");
-		param.put("memberId", loginMember.getMemberId());
-		param.put("foodNo", foodNo);
+	public int insertHeart(@RequestParam Map param) {
 		int result = service.insertHeart(param);
+		System.out.println("insertheartResult : "+result);
 		return result;
 	}
 
 	@GetMapping("/deleteHeart")
 	@ResponseBody
-	public int deleteHeart(@RequestParam Map param, HttpSession session, int foodNo) {
-		Member loingMember = (Member) session.getAttribute("loginMember");
-		param.put("memberId", loingMember.getMemberId());
-		param.put("foodNo", foodNo);
+	public int deleteHeart(@RequestParam Map param) {
 		int result = service.deleteHeart(param);
+		System.out.println("deleteheartResult : "+result);
 		return result;
 	}
 
