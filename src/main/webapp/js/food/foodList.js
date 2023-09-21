@@ -50,39 +50,39 @@ $(document).ready(function() {
 });
 
 
-if($("#memberL").val()!=""){
-	$(".like").on("click", function() {
-		var foodNo = $(this).val();
-		console.log(foodNo);
+// if($("#memberL").val()!=""){
+// 	$(".like").on("click", function() {
+// 		var foodNo = $(this).val();
+// 		console.log(foodNo);
 		
-		if ($(this).is(":checked")) {
-			$.ajax({
-				url: path+"/food/insertHeart",
-				data: {
-					foodNo: foodNo
-				},
-				success: function(result) {
-					if (result > 0) {
+// 		if ($(this).is(":checked")) {
+// 			$.ajax({
+// 				url: path+"/food/insertHeart",
+// 				data: {
+// 					foodNo: foodNo
+// 				},
+// 				success: function(result) {
+// 					if (result > 0) {
 
-					}
-				}
-			})
-		} else {
-			$.ajax({
-				url: path+"/food/deleteHeart",
-				data: {
-					foodNo: foodNo
-				},
-				success: function(result) {
-					if (result > 0) {
+// 					}
+// 				}
+// 			})
+// 		} else {
+// 			$.ajax({
+// 				url: path+"/food/deleteHeart",
+// 				data: {
+// 					foodNo: foodNo
+// 				},
+// 				success: function(result) {
+// 					if (result > 0) {
 
-					}
-				}
-			})
-		}
+// 					}
+// 				}
+// 			})
+// 		}
 
-	})
-}
+// 	})
+// }
 
 // 음식 목록 업데이트 함수
 function updateFoodList(foods) {

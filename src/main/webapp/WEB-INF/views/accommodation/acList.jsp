@@ -18,7 +18,7 @@
 							<div class="heartContainer">
 								<div class="con-like">
 									<input title="like" type="checkbox" class="like"
-										value="${al.acId}" />
+										value="${al.acId}"/>
 									<div class="checkmark">
 										<svg viewBox="0 0 24 24" class="outline"
 											xmlns="http://www.w3.org/2000/svg">
@@ -147,7 +147,7 @@
 	var checkInOutDay = []
 	var checkHolyDay=[]
 	var memberId=""
-	$(".like").on("click",function(e){			
+	$(".like").on("click",function(e){	
 		if(${empty loginMember}){
 			e.preventDefault()
 			$("#modal").css("display","flex")

@@ -145,7 +145,7 @@
 	}
 
 	<!-- 좋아요 비동기 업데이트 -->
-	$("input.like").click(e=>{
+/* 	$("input.like").click(e=>{
 		$.ajax({
 			type : "GET",            // HTTP method type(GET, POST) 형식이다.
 			url : "/test/ajax",      // 컨트롤러에서 대기중인 URL 주소이다.
@@ -158,18 +158,26 @@
 				alert("통신 실패.")
 			}
 		});
-	})
-
-	$(".like").on("change",function(){
+	}) */
+	function getContextPath() {
+		var hostIndex = location.href.indexOf(location.host) + location.host.length;
+		return location.href.substring(hostIndex, location.href.indexOf('/', hostIndex + 1));
+	};
 	
+
+	$(".like").on("change",function(e){
+	
+		console.log(${path });
+		
 		var foodNo=$(this).val();
 		
 		if($(this).is(":checked")){
+			console.log("true");
 			$.ajax({
-				url : pageContext.request.contextPath+"/food/insertHeart",
+				url : getContextPath()+"/insertHeart",
 				data :{
-					memberId : memberId,
-					foodNo : foodNo
+					memberId : ${loginMember.memberId},
+					foodNo : e.target.value
 				},
 				success:function(result){
 					if(result>0){
@@ -179,10 +187,10 @@
 			})
 		}else{
 			$.ajax({
-				url : ${path}+"/food/deleteHeart",
+				url : getContextPath()+"/deleteHeart",
 				data :{
-					memberId : memberId,
-					foodNo : foodNo
+					memberId : ${loginMember.memberId},
+					foodNo : e.target.value
 				},
 				success:function(result){
 					if(result>0){
