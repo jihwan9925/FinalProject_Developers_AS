@@ -112,7 +112,6 @@ public class FoodServiceImpl implements FoodService{
 	
 	@Override
 	public List<Food> selectFoodAll(Map<String, Object> param) {
-
 		return dao.selectFoodAll(session, param);
 	}
 	

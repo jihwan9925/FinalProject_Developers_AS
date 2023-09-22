@@ -71,11 +71,16 @@ public class FoodController {
 		// DB값 불러오기
 		List<Food> foods = service.selectFoodAll(Map.of("cPage", cPage, "numPerpage", numPerpage));
 		int totalData = service.selectFoodCount();
+		
+		//음식점 좋아요&댓글 수 불러오기
+//		int count = service.heartCountByFoodNo();
 
 		m.addAttribute("pageBar", PageFactory.getPage(cPage, numPerpage, totalData, "foodList2.do"));
 
 		m.addAttribute("totalData", totalData);
 		m.addAttribute("foods", foods);
+//		m.addAttribute("heartCount", count);
+//		m.addAttribute("heartComment", comment);
 
 		return "food/foodList";
 	}

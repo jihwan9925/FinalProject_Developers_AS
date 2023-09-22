@@ -132,17 +132,17 @@
 </div>
 <script type="text/javascript">
 <c:if test="${not empty loginMember }">
-<c:forEach var="al" items="${ac}">
-<c:forEach var="ah" items="${al.acHearts}">
-	<c:if test="${loginMember.memberId==ah.memberId}">
-		$(".like").each(function(i,l){
-			if($(this).val()==${ah.acId}){
-				$(this).prop("checked",true)
-			}
-		})
-	</c:if>
-</c:forEach>
-</c:forEach>
+	<c:forEach var="al" items="${ac}">
+		<c:forEach var="ah" items="${al.acHearts}">
+			<c:if test="${loginMember.memberId==ah.memberId}">
+				$(".like").each(function(i,l){
+					if($(this).val()==${ah.acId}){
+						$(this).prop("checked",true)
+					}
+				})
+			</c:if>
+		</c:forEach>
+	</c:forEach>
 </c:if>
 	var checkInOutDay = []
 	var checkHolyDay=[]
