@@ -86,11 +86,13 @@
 					<div class="countDiv">
 						<img class="heart" src="${path }/images/food/fillheart.svg">
                   <!-- 번호가 foodNo인 음식점의 좋아요 개수를 한번에 가져오는데 어려움 -->
-                  <c:forEach var="fh" items="${hount}" varStatus="vs">
-                  	  <c:if test="${fh.foodNo = f.foodNo }">
-		                  <span class="heart_count">${hcount.}</span>                 	  	  
-                  	  </c:if>
+                  <c:forEach var="fh" items="${f.foodHeart}" begin="0" end="1">
+                  	  <!-- 1. 음식점 당 좋아요 리스트가 개별로 나오도록 코딩 -->
+                  	  <c:set var="fhcount" value="${fh.fhNo}" />
+                  	  <!-- 2. 코딩 횟수를 fn:length()로 구하기 -->
+                  	  
                   </c:forEach>
+		          <span class="heart_count">${fhcount}</span>
                   
                   <img class="comment" src="${path }/images/food/comment.png"> 
                   <span class="comment_count">${f.foodReadCount}</span>

@@ -80,7 +80,7 @@ public class FoodController {
 
 		m.addAttribute("totalData", totalData);
 		m.addAttribute("foods", foods);
-		m.addAttribute("hount", hcount);
+		m.addAttribute("hcount", hcount);
 //		m.addAttribute("heartComment", comment);
 
 		return "food/foodList";
