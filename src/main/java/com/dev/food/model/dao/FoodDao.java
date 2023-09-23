@@ -61,6 +61,8 @@ public interface FoodDao {
 	
 	int selectFoodCount(SqlSession session);
 	
+	List<FoodHeart> heartCountByFoodNo(SqlSession session);
+	
 	int selectFoodCountByKeyword(SqlSession session, Map type);
 	
 	Food selectFoodByNo(SqlSession session, int no);

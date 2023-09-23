@@ -30,6 +30,7 @@ import com.dev.common.PageFactory;
 import com.dev.common.PageFactoryByKeyword;
 import com.dev.food.model.dto.Food;
 import com.dev.food.model.dto.FoodBlackList;
+import com.dev.food.model.dto.FoodHeart;
 import com.dev.food.model.dto.FoodPhoto;
 import com.dev.food.model.dto.FoodPhotoTemp;
 import com.dev.food.model.dto.FoodReview;
@@ -73,13 +74,13 @@ public class FoodController {
 		int totalData = service.selectFoodCount();
 		
 		//음식점 좋아요&댓글 수 불러오기
-//		int count = service.heartCountByFoodNo();
+		List<FoodHeart> hcount = service.heartCountByFoodNo();
 
 		m.addAttribute("pageBar", PageFactory.getPage(cPage, numPerpage, totalData, "foodList2.do"));
 
 		m.addAttribute("totalData", totalData);
 		m.addAttribute("foods", foods);
-//		m.addAttribute("heartCount", count);
+		m.addAttribute("hount", hcount);
 //		m.addAttribute("heartComment", comment);
 
 		return "food/foodList";

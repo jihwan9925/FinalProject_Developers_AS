@@ -148,6 +148,11 @@ public class FoodDaoImpl implements FoodDao {
 	}
 	
 	@Override
+	public List<FoodHeart> heartCountByFoodNo(SqlSession session) {
+		return session.selectList("food.heartCountByFoodNo");
+	}
+	
+	@Override
 	public int selectFoodCountByKeyword(SqlSession session, Map type) {
 		return session.selectOne("food.selectFoodCountByKeyword", type);
 	}

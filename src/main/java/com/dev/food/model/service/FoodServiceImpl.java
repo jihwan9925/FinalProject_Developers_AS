@@ -137,6 +137,11 @@ public class FoodServiceImpl implements FoodService{
 	}	
 	
 	@Override
+	public List<FoodHeart> heartCountByFoodNo() {
+		return dao.heartCountByFoodNo(session);
+	}
+	
+	@Override
 	public int selectFoodCountByKeyword(Map type) {
 		// TODO Auto-generated method stub
 		return dao.selectFoodCountByKeyword(session,type);

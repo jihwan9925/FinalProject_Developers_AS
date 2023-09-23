@@ -54,6 +54,8 @@ public interface FoodService {
 	
 	int selectFoodCount();
 	
+	List<FoodHeart> heartCountByFoodNo();
+	
 	int selectFoodCountByKeyword(Map type);
 	
 	Food selectFoodByNo(int no);
