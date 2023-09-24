@@ -86,11 +86,11 @@
 					<div class="countDiv">
 						<img class="heart" src="${path }/images/food/fillheart.svg">
                   <!-- 번호가 foodNo인 음식점의 좋아요 개수를 한번에 가져오는데 어려움 -->
-                  <c:forEach var="fh" items="${f.foodHeart}" begin="0" end="1">
+                  <c:forEach var="fh" items="${f.foodHeart}" varStatus="vs">
                   	  <!-- 1. 음식점 당 좋아요 리스트가 개별로 나오도록 코딩 -->
-                  	  <c:set var="fhcount" value="${fh.fhNo}" />
+                  	  <c:set var="fhcount" value="${fh.fhNo}"/>
                   	  <!-- 2. 코딩 횟수를 fn:length()로 구하기 -->
-                  	  
+                  	  <input type="hidden" class="heartCount" value="${fh.fhNo}" oninput="fn_calHeart(e)"/>
                   </c:forEach>
 		          <span class="heart_count">${fhcount}</span>
                   
@@ -229,7 +229,14 @@
 		}else{
 			memberId="${loginMember.memberId}"
 		}
-	})
+	});
+	
+	/* 좋아요 수 계산기 */
+	function fn_calHeart(e){
+		const hcount = $(e.target).attr("class");
+		const num = $(".hcount").length();
+		console.log("number : "+ num);
+	}
 </script>
 
 <script src="${path }/js/food/foodList.js" />
