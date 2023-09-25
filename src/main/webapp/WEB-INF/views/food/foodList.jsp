@@ -85,17 +85,13 @@
 					<div class="food_address" style="color: #828282;">${f.foodAddress}</div>
 					<div class="countDiv">
 						<img class="heart" src="${path }/images/food/fillheart.svg">
-                  <!-- 번호가 foodNo인 음식점의 좋아요 개수를 한번에 가져오는데 어려움 -->
-                  <c:forEach var="fh" items="${f.foodHeart}" varStatus="vs">
-                  	  <!-- 1. 음식점 당 좋아요 리스트가 개별로 나오도록 코딩 -->
-                  	  <c:set var="fhcount" value="${fh.fhNo}"/>
-                  	  <!-- 2. 코딩 횟수를 fn:length()로 구하기 -->
-                  	  <input type="hidden" class="heartCount" value="${fh.fhNo}" oninput="fn_calHeart(e)"/>
-                  </c:forEach>
-		          <span class="heart_count">${fhcount}</span>
-                  
-                  <img class="comment" src="${path }/images/food/comment.png"> 
-                  <span class="comment_count">${f.foodReadCount}</span>
+						<c:forEach var="fh" items="${f.foodHeart}" varStatus="vs">
+							<!-- 1. 음식점 당 좋아요 리스트가 개별로 나오도록 코딩 -->
+							<c:set var="fhcount" value="${vs.count}"/>
+						</c:forEach>					
+						<span class="heart_count">${fhcount}</span>
+						<img class="comment" src="${path }/images/food/comment.png"> 
+						<span class="comment_count">${f.foodReadCount}</span>
 					</div>
 				</div>
 			</c:forEach>
@@ -104,7 +100,6 @@
 			<div class="food_notsearch">검색결과가 없습니다.</div>
 		</c:if>
 		<!-- /음식 목록 -->
-
 		<input type="hidden" value="${loginMember.memberId }" id="memberL">
 	</div>
 
@@ -119,18 +114,6 @@
 		<c:out value="${pageBar }" escapeXml='false' />
 	</div>
 	<!-- /페이지바 -->
-	
-	<%-- <c:forEach var="f" items="${foods}">
-		<c:forEach var="fh" items="${f.foodHeart}">
-			<c:if test="${loginMember.memberId==fh.memberId}">
-				$(".like").each(function(i,l){
-					if($(this).val()==${fh.foodNo}){
-						$(this).prop("checked",true);
-					}
-				});
-			</c:if>
-		</c:forEach>
-	</c:forEach> --%>
 	
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
@@ -147,26 +130,10 @@
 		$("#keyword").val("${keyword}");
 	}
 
-	<!-- 좋아요 비동기 업데이트 -->
-/* 	$("input.like").click(e=>{
-		$.ajax({
-			type : "GET",            // HTTP method type(GET, POST) 형식이다.
-			url : "/test/ajax",      // 컨트롤러에서 대기중인 URL 주소이다.
-			data : params,            // Json 형식의 데이터이다.
-			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
-				// 응답코드 > 0000
-				alert(res.code);
-			},
-			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
-				alert("통신 실패.")
-			}
-		});
-	}) */
 	function getContextPath() {
 		var hostIndex = location.href.indexOf(location.host) + location.host.length;
 		return location.href.substring(hostIndex, location.href.indexOf('/', hostIndex + 1));
 	};
-	
 
 	$(".like").on("change",function(e){
 	
@@ -175,19 +142,14 @@
 		var foodNo=$(this).val();
 		
 		if($(this).is(":checked")){
-			console.log("true");
 			$.ajax({
 				url : getContextPath()+"/insertHeart",
-				data :{
+				data : {
 					memberId : ${loginMember.memberId},
 					foodNo : e.target.value
 				},
-				success:function(result){
-					if(result>0){
-						
-					}
-				}
-			})
+				success:console.log("좋아요 추가"),
+			});
 		}else{
 			$.ajax({
 				url : getContextPath()+"/deleteHeart",
@@ -195,15 +157,12 @@
 					memberId : ${loginMember.memberId},
 					foodNo : e.target.value
 				},
-				success:function(result){
-					if(result>0){
-						
-					}
-				}
+				success:console.log("좋아요 삭제"),
 			})
 		}
 	});
 	
+	// 유저의 좋아요 정보를 기억하여 유지
 	<c:if test="${not empty loginMember }">
 		<c:forEach var="f" items="${foods}">
 			<c:forEach var="fh" items="${f.foodHeart}">
@@ -218,18 +177,6 @@
 			</c:forEach>
 		</c:forEach>
 	</c:if>
-	
-	var checkInOutDay = []
-	var checkHolyDay=[]
-	var memberId=""
-	$(".like").on("click",function(e){	
-		if(${empty loginMember}){
-			e.preventDefault()
-			$("#modal").css("display","flex")
-		}else{
-			memberId="${loginMember.memberId}"
-		}
-	});
 	
 	/* 좋아요 수 계산기 */
 	function fn_calHeart(e){
