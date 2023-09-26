@@ -88,10 +88,20 @@
 						<c:forEach var="fh" items="${f.foodHeart}" varStatus="vs">
 							<!-- 1. 음식점 당 좋아요 리스트가 개별로 나오도록 코딩 -->
 							<c:set var="fhcount" value="${vs.count}"/>
+						</c:forEach>
+						
+						<c:forEach var="fr" items="${f.foodReview}" varStatus="rvs">
+							<c:if test="${fr.frNo eq 0}">
+								<c:set var="frcount" value="0"/>
+							</c:if>
+							<c:if test="${fr.frNo ne 0}">
+								<!-- not empty test -->
+								<c:set var="frcount" value="${rvs.count}"/>
+							</c:if>
 						</c:forEach>					
 						<span class="heart_count">${fhcount}</span>
 						<img class="comment" src="${path }/images/food/comment.png"> 
-						<span class="comment_count">${f.foodReadCount}</span>
+						<span class="comment_count">${frcount}</span>
 					</div>
 				</div>
 			</c:forEach>

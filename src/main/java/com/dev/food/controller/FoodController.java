@@ -71,6 +71,7 @@ public class FoodController {
 
 		// DB값 불러오기
 		List<Food> foods = service.selectFoodAll(Map.of("cPage", cPage, "numPerpage", numPerpage));
+		System.out.println("food : "+foods);
 		int totalData = service.selectFoodCount();
 		
 		//음식점 좋아요&댓글 수 불러오기
